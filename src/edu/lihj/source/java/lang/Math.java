@@ -96,6 +96,34 @@ import sun.misc.DoubleConsts;
  * increment, decrement, and negation overflow occurs only with
  * a specific minimum or maximum value and should be checked against
  * the minimum or maximum as appropriate.
+ * 类 Math
+ * 包含用于执行基本*数值运算的方法，
+ * 例如基本指数，对数，平方根和三角函数。
+ * 与类{@code StrictMath}的某些数字方法不同，
+ * 类{@code Math}的等效*函数的所有实现未定义为返回逐位相同的结果。
+ * 这种放松使得*不需要严格的可重复性的性能更好的实现成为可能。
+ * 默认情况下，许多{@code Math}方法只是为它们的实现调用{@code StrictMath}中的等效方法。鼓励代码生成器使用*特定于平台的本机库或微处理器指令（如果可用），
+ * 以提供* {@code Math}方法的更高性能的实现。这种更高性能的实现仍必须符合
+ * {@code Math}的规范。
+ * 实现规范的质量与两个属性有关，即返回结果的准确性和方法的单调性。浮点{@code Math}方法的精度
+ * 以<i> ulps </ i>（最后一位）为单位进行度量。对于给定的浮点格式，特定实数值的{@linkplain #ulp（double）ulp}是包围该数值的两个
+ * 浮点值之间的距离。当讨论一个方法的整体准确性而不是某个特定参数时，所引用的ulps数量是任何参数中最坏情况下的错误。如果某个方法的错误始终小于* 0.5 ulps，
+ * 则该方法始终返回最接近精确结果的浮点数*；这样的方法是<i>正确*舍入的</ i>。通常，正确的舍入方法最好是*浮点近似。但是，要正确舍入许多浮点方法是不切实际的。相反，对于{@code Math}类，某些方法允许更大的错误界限1或2 ulps。非正式地，误差范围为1 ulp，
+ * 当精确结果为可表示的数字时，应将精确结果
+ * 作为计算结果返回；否则，将返回
+ * 包含精确结果的两个浮点值中的一个。为了获得精确的量值，括号中的
+ * 个端点之一可能是无限的。除了在单个参数上的准确性外，在不同参数上的方法之间保持适当的关系也很重要。因此，大多数
+ * 误差大于0.5 ulp的方法都必须是<i>半单调的</ i>：每当数学函数不减小时，浮点逼近也是如此，同样，无论什么时候*数学函数没有增加，因此*浮点近似也没有增加。并非所有具有1  ulp精度的近似值都将自动满足单调性要求。
+ * 该平台使用带
+ * int和long基本类型的带符号二进制补码整数算法。开发人员应该选择原始类型，以确保算术运算能够始终如一地产生正确的结果，这在某些情况下意味着运算将不会溢出计算值的范围。
+ * 最佳实践是选择原始类型和算法，以避免溢出。在大小为{@code int}或{@code long}且需要检测
+ * 溢出错误的情况下，方法{@code addExact}，
+ * {@code减去Exact}，{@ codemultipleExact}和{@代码toIntExact}
+ * 当结果溢出时抛出{@code ArithmeticException}。
+ * 对于其他算术运算，例如除法，绝对值，
+ * 递增，递减和取反溢出仅在
+ * 具有特定的最小值或最大值的情况下发生，并且应根据*的最小值或最大值进行检查。
+ *
  *
  * @author  unascribed
  * @author  Joseph D. Darcy
@@ -1247,6 +1275,9 @@ public final class Math {
      * @param   a   an argument.
      * @param   b   another argument.
      * @return  the larger of {@code a} and {@code b}.
+     *
+     * 两数求最大值并返回
+     *
      */
     public static int max(int a, int b) {
         return (a >= b) ? a : b;
